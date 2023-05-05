@@ -28,6 +28,9 @@ public class Wine {
     @Column(nullable = false)
     private Long information;
     @Column(nullable = false)
-    private long likeCount;
+    private long recommendCount;
 
+    public void setRecommendCount(long recommendCount){
+        this.recommendCount = recommendCount;
+    }
 }
