@@ -16,9 +16,9 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     //리뷰 작성
-    @PostMapping("/review")
-    public ResponseEntity<Message> createPost(@RequestBody ReviewRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return reviewService.createPost(requestDto, userDetails.getMember());
+    @PostMapping("/review/{wine-id}")
+    public ResponseEntity<Message> createPost(@PathVariable(name = "wine-id")Long wineId, @RequestBody ReviewRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return reviewService.createPost(wineId, requestDto, userDetails.getMember());
     }
     //리뷰 수정
     @PutMapping("/review/{review-id}/update")

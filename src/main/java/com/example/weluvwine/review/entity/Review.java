@@ -20,9 +20,13 @@ public class Review extends Timestamped {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    public Review (ReviewRequestDto requestDto, Member member){
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Wine wine;
+
+    public Review (ReviewRequestDto requestDto, Member member, Wine wine){
         this.content = requestDto.getContent();
         this.member = member;
+        this.wine = wine;
     }
 
     public void update(ReviewRequestDto requestDto){
