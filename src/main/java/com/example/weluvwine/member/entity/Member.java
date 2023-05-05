@@ -1,5 +1,7 @@
 package com.example.weluvwine.member.entity;
 
+import com.example.weluvwine.member.dto.SignupMemberRequestDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +25,11 @@ public class Member {
 
     @Column
     private String nickname;
+
+
+    public Member(SignupMemberRequestDto requestDto) {
+        this.memberId = requestDto.getMemberId();
+        this.password = requestDto.getPassword();
+        this.nickname = requestDto.getNickname();
+    }
 }
