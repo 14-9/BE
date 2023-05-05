@@ -1,5 +1,6 @@
 package com.example.weluvwine.member.service;
 
+import com.example.weluvwine.jwt.JwtUtil;
 import com.example.weluvwine.member.dto.LoginMemberRequestDto;
 import com.example.weluvwine.member.dto.SignupMemberRequestDto;
 import com.example.weluvwine.member.entity.Member;
@@ -22,6 +23,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     // 회원가입
     @Transactional
@@ -58,10 +60,7 @@ public class MemberService {
             //TODO : 예외처리 "비밀번호 틀림"
         }
 
-        //TODO : JWT 토큰 생성 및 check
-
-        // TODO : jwt 토큰 작업 후 헤더에 넣는 로직
-//        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(foundMember.getMemberId()));
+        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(foundMember.getMemberId()));
 
         Message message = Message.setSuccess(StatusEnum.OK, "로그인 성공", null);
         return new ResponseEntity<>(message, HttpStatus.OK);
