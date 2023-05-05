@@ -1,5 +1,6 @@
 package com.example.weluvwine.jwt;
 
+import com.example.weluvwine.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
