@@ -24,4 +24,8 @@ public class WineController {
     public ResponseEntity readWine(@PathVariable Long reviewId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return wineService.readWine(reviewId);
     }
+    @GetMapping("/api/rank")
+    public ResponseEntity rankWine(){
+        return wineService.rankWine();
+    }
 }
