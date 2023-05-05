@@ -33,7 +33,7 @@ public class WineService {
     @Transactional(readOnly = true)
     public ResponseEntity<Message> rankWine(){
         List<Wine> topWineList = wineRepository.findTop8ByRecommendCount();
-        Message message = Message.setSuccess(StatusEnum.OK,"상세 페이지 조회 성공", topWineList);
+        Message message = Message.setSuccess(StatusEnum.OK,"랭킹 조회 성공", topWineList);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }
