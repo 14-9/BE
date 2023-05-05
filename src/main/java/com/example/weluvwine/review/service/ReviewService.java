@@ -6,25 +6,33 @@ import com.example.weluvwine.review.dto.ReviewRequestDto;
 import com.example.weluvwine.review.entity.Review;
 import com.example.weluvwine.review.repository.ReviewRepository;
 import com.example.weluvwine.util.StatusEnum;
+import com.example.weluvwine.wine.entity.Wine;
+import com.example.weluvwine.wine.repository.WineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final WineRepository wineRepository;
 
     //리뷰 작성
-    public ResponseEntity<Message> createPost(ReviewRequestDto requestDto, Member member) {
-        Review review = new Review(requestDto, member);
+    public ResponseEntity<Message> createPost(Long wineId, ReviewRequestDto requestDto, Member member) {
+        Wine wine = findWineById(wineId);
+        Review review = new Review(requestDto, member, wine);
         reviewRepository.save(review);
         Message message = Message.setSuccess(StatusEnum.OK,"리뷰 작성 성공", null);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
     //리뷰 수정
+
     public ResponseEntity<Message> updatePost(Long reviewId, ReviewRequestDto requestDto, Member member){
         Review review = findReviewById(reviewId);
         isUserReview(review, member);
@@ -41,10 +49,15 @@ public class ReviewService {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    //와인 존재 확인
+    private Wine findWineById(Long id) {
+        return wineRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 와인이 존재하지 않습니다."));
+    }
     //리뷰 유무 확인
     public Review findReviewById(Long id){
         return reviewRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+                () -> new IllegalArgumentException("해당 리뷰가 존재하지 않습니다."));
     }
     //작성자 리뷰 확인
     public void isUserReview(Review review, Member member){

@@ -22,21 +22,26 @@ public class UserDetailsImpl implements UserDetails {
         return member;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        UserRoleEnum role = user.getRole();
-        String authority = role.getAuthority();
-
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(simpleGrantedAuthority);
-
-        return authorities;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        UserRoleEnum role = user.getRole();
+//        String authority = role.getAuthority();
+//
+//        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
+//        Collection<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(simpleGrantedAuthority);
+//
+//        return authorities;
+//    }
 
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     @Override
