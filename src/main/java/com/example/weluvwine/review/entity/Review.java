@@ -3,12 +3,15 @@ package com.example.weluvwine.review.entity;
 import com.example.weluvwine.member.entity.Member;
 import com.example.weluvwine.review.dto.ReviewRequestDto;
 import com.example.weluvwine.util.Timestamped;
+import com.example.weluvwine.wine.entity.Wine;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
+@NoArgsConstructor
 public class Review extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,8 @@ import com.example.weluvwine.review.dto.ReviewRequestDto;
 import com.example.weluvwine.review.entity.Review;
 import com.example.weluvwine.review.repository.ReviewRepository;
 import com.example.weluvwine.util.StatusEnum;
+import com.example.weluvwine.wine.entity.Wine;
+import com.example.weluvwine.wine.repository.WineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final WineRepository wineRepository;
 
     //리뷰 작성
     public ResponseEntity<Message> createPost(Long wineId, ReviewRequestDto requestDto, Member member) {
