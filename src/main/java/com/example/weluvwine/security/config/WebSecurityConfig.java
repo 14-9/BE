@@ -2,6 +2,7 @@ package com.example.weluvwine.security.config;
 
 
 import com.example.weluvwine.security.jwt.JwtAuthFilter;
+import com.example.weluvwine.security.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -78,12 +82,35 @@ public class WebSecurityConfig {
                     response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access denied");
                 });
 
+        http.csrf();
+
         // JWT 인증/인가를 사용하기 위한 설정
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(jwtAuthFilter, ExceptionTranslationFilter.class);
 
 
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration config = new CorsConfiguration();
+
+        config.addAllowedOrigin("http://locahost:8080");
+
+        config.addExposedHeader(JwtUtil.AUTHORIZATION_HEADER);
+
+        config.addAllowedMethod("*");
+
+        config.addAllowedHeader("*");
+
+        config.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        source.registerCorsConfiguration("/**", config);
+
+        return source;
     }
 
 }
