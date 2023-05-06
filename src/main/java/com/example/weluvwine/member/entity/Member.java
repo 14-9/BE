@@ -19,13 +19,13 @@ public class Member {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String memberId;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
-    @Column
+    @Column(nullable = false)
     private String nickname;
 
 
