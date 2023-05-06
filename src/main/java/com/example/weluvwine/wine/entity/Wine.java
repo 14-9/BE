@@ -20,7 +20,7 @@ public class Wine {
     @Column(nullable = false)
     private String grape;
     @Column(nullable = false)
-    private Long vintage;
+    private String vintage;
     @Column(nullable = false)
     private String winery;
     @Column(nullable = false)
