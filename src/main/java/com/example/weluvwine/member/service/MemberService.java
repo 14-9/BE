@@ -1,5 +1,6 @@
 package com.example.weluvwine.member.service;
 
+import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.jwt.JwtUtil;
 import com.example.weluvwine.member.dto.LoginMemberRequestDto;
 import com.example.weluvwine.member.dto.SignupMemberRequestDto;
@@ -16,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
+
+import static com.example.weluvwine.exception.ErrorCode.DUPLICATE_IDENTIFIER;
+import static com.example.weluvwine.exception.ErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +39,7 @@ public class MemberService {
         // 회원 중복 check
         Optional<Member> foundMember = memberRepository.findMemberByMemberId(memberId);
         if (foundMember.isPresent()) {
-            // TODO : 예외처리 "memberId 중복"
+            throw new CustomException(DUPLICATE_IDENTIFIER);
         }
 
         Member member = new Member(requestDto);
@@ -52,12 +56,13 @@ public class MemberService {
         String password = requestDto.getPassword();
 
         // 회원 가입한 회원인지 check
-        Member foundMember = memberRepository.findMemberByMemberId(memberId).get();
-        // TODO : 예외처리 "사용자 찾을 수 없음"
+        Member foundMember = memberRepository.findMemberByMemberId(memberId).orElseThrow(
+                () -> new CustomException(USER_NOT_FOUND)
+        );
 
         // 비밀번호 check
         if (!passwordEncoder.matches(password, foundMember.getPassword())) {
-            //TODO : 예외처리 "비밀번호 틀림"
+            throw new CustomException(USER_NOT_FOUND);
         }
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(foundMember.getMemberId()));
