@@ -12,7 +12,6 @@ import com.example.weluvwine.member.repository.MemberRepository;
 import com.example.weluvwine.redis.redisUtil.RedisUtil;
 import com.example.weluvwine.util.Message;
 import com.example.weluvwine.util.StatusEnum;
-import com.sun.xml.bind.v2.model.core.Ref;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +55,7 @@ public class MemberService {
 
         Member member = new Member(memberId, password, nickname);
         memberRepository.save(member);
-        Message message = Message.setSuccess(StatusEnum.OK, "회원가입 성공", null);
+        Message message = Message.setSuccess(StatusEnum.OK, "회원가입 성공");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
@@ -90,7 +89,7 @@ public class MemberService {
         }
         //response 헤더에 AccessToken / RefreshToken
         setHeader(response, tokenDto);
-        Message message = Message.setSuccess(StatusEnum.OK, "로그인 성공", null);
+        Message message = Message.setSuccess(StatusEnum.OK, "로그인 성공");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

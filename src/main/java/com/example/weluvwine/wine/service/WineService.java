@@ -25,7 +25,7 @@ public class WineService {
         List<Wine> wineList = wineRepository.findByNameContaining(searchKeyword);
         Message message;
         if(wineList.size() == 0){
-            message = Message.setSuccess(StatusEnum.OK,"검색 결과 없음", wineList);
+            message = Message.setSuccess(StatusEnum.OK,"검색 결과 없음");
         } else {
             message = Message.setSuccess(StatusEnum.OK,"검색 성공", wineList);
         }
