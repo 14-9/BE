@@ -47,7 +47,7 @@ public class MemberService {
             throw new CustomException(DUPLICATE_IDENTIFIER);
         }
 
-        Member member = new Member(requestDto);
+        Member member = new Member(memberId, password, nickname);
         memberRepository.save(member);
         Message message = Message.setSuccess(StatusEnum.OK, "회원가입 성공", null);
         return new ResponseEntity<>(message, HttpStatus.OK);
