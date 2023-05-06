@@ -35,8 +35,8 @@ public class ReviewService {
     public ResponseEntity<Message> createPost(Long wineId, ReviewRequestDto requestDto, Member member) {
         Wine wine = findWineById(wineId);
         Review review = new Review(requestDto, member, wine);
-        ReviewResponseDto reviewResponseDto = new ReviewResponseDto(reviewRepository.save(review));
-        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 작성 성공", reviewResponseDto);
+        reviewRepository.save(review);
+        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 작성 성공", review);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
