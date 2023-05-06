@@ -12,7 +12,7 @@ public class Wine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String url;
+    private String imageUrl;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
