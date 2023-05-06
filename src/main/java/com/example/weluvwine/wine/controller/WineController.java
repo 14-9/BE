@@ -3,6 +3,7 @@ package com.example.weluvwine.wine.controller;
 import com.example.weluvwine.security.UserDetailsImpl;
 import com.example.weluvwine.util.Message;
 import com.example.weluvwine.wine.service.WineService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "WineController", description = "와인 조회 관련 API")
 public class WineController {
     private final WineService wineService;
 

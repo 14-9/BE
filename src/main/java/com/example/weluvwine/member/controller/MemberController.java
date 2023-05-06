@@ -5,6 +5,7 @@ import com.example.weluvwine.member.dto.SignupMemberRequestDto;
 import com.example.weluvwine.member.service.MemberService;
 import com.example.weluvwine.security.UserDetailsImpl;
 import com.example.weluvwine.util.Message;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
+@Tag(name = "MemberController", description = "유저 관련 API")
 public class MemberController {
     private final MemberService memberService;
 
