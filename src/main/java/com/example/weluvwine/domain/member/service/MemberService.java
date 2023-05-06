@@ -56,7 +56,7 @@ public class MemberService {
 
         Member member = new Member(memberId, password, nickname);
         memberRepository.save(member);
-        Message message = Message.setSuccess(StatusEnum.OK, "회원가입 성공");
+        Message message = Message.setSuccess(StatusEnum.OK, "회원가입 성공", foundMember);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
@@ -90,7 +90,7 @@ public class MemberService {
         }
         //response 헤더에 AccessToken / RefreshToken
         setHeader(response, tokenDto);
-        Message message = Message.setSuccess(StatusEnum.OK, "로그인 성공");
+        Message message = Message.setSuccess(StatusEnum.OK, "로그인 성공", foundMember);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
