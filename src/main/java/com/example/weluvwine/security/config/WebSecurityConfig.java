@@ -1,6 +1,5 @@
 package com.example.weluvwine.security.config;
 
-
 import com.example.weluvwine.security.jwt.JwtAuthFilter;
 import com.example.weluvwine.security.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -46,12 +45,6 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
         //비번 암호화 기능
     }
-//    @Override
-//    public void configure(WebSecurity web) throws Exception{
-//        web
-//                .ignoring()
-//                .antMatchers("/api/read/**");
-//    }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -73,8 +66,8 @@ public class WebSecurityConfig {
                 .antMatchers("/api/user/signup").permitAll()
                 //swagger
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
-
                 .anyRequest().authenticated();
+
         http.exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) ->
                         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "authentication failed"))
@@ -82,7 +75,7 @@ public class WebSecurityConfig {
                     response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access denied");
                 });
 
-        http.csrf();
+        http.cors();
 
         // JWT 인증/인가를 사용하기 위한 설정
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
