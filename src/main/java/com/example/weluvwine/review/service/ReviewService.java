@@ -36,7 +36,7 @@ public class ReviewService {
         Wine wine = findWineById(wineId);
         Review review = new Review(requestDto, member, wine);
         reviewRepository.save(review);
-        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 작성 성공", review);
+        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 작성 성공");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
@@ -45,7 +45,7 @@ public class ReviewService {
         Review review = findReviewById(reviewId);
         isUserReview(review, member);
         review.update(requestDto);
-        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 수정 성공", review);
+        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 수정 성공");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
     //리뷰 삭제
@@ -53,7 +53,7 @@ public class ReviewService {
         Review review = findReviewById(reviewId);
         isUserReview(review, member);
         reviewRepository.deleteById(reviewId);
-        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 삭제 성공", "");
+        Message message = Message.setSuccess(StatusEnum.OK,"리뷰 삭제 성공");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
