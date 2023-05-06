@@ -16,7 +16,7 @@ public class Wine {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private String contry;
+    private String country;
     @Column(nullable = false)
     private String grape;
     @Column(nullable = false)
