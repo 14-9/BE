@@ -1,10 +1,8 @@
 package com.example.weluvwine.jwt;
 
-import com.example.weluvwine.exceptionDto.SecurityExceptionDto;
 import com.example.weluvwine.member.entity.Member;
 import com.example.weluvwine.member.repository.MemberRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
