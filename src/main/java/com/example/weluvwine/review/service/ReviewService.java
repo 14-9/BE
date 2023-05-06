@@ -78,7 +78,7 @@ public class ReviewService {
     //작성자 리뷰 확인
 
     public void isUserReview(Review review, Member member){
-        if(!review.getId().equals(member.getId())){
+        if(!review.getMember().getId().equals(member.getId())){
             throw new CustomException(NOT_AUTHORIZED_USER);
         }
     }
