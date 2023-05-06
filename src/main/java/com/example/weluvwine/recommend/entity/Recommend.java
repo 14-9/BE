@@ -3,11 +3,13 @@ package com.example.weluvwine.recommend.entity;
 import com.example.weluvwine.member.entity.Member;
 import com.example.weluvwine.wine.entity.Wine;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
+@NoArgsConstructor
 public class Recommend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
