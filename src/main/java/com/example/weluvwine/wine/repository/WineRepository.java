@@ -8,5 +8,5 @@ import java.util.List;
 public interface WineRepository extends JpaRepository<Wine, Long> {
     List<Wine> findByNameContaining(String searchKeyword);
 
-    List<Wine> findTop8ByRecommendCount();
+    List<Wine> findTop8ByRecommendCount(int num);
 }
