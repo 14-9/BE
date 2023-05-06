@@ -22,7 +22,7 @@ public class Wine {
     @Column(nullable = false)
     private Long vintage;
     @Column(nullable = false)
-    private Long winary;
+    private Long winery;
     @Column(nullable = false)
     private Long type;
     @Column(nullable = false)
