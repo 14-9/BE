@@ -1,6 +1,7 @@
 package com.example.weluvwine.wine.entity;
 
 import lombok.Getter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -27,6 +28,7 @@ public class Wine {
     @Column(nullable = false)
     private String information;
     @Column(nullable = false)
+    @ColumnDefault("0")
     private long recommendCount;
 
     public void setRecommendCount(long recommendCount){
