@@ -9,7 +9,6 @@ import javax.persistence.*;
 public class Wine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wine_id")
     private Long id;
     @Column(nullable = false)
     private String url;
