@@ -22,11 +22,11 @@ public class Wine {
     @Column(nullable = false)
     private Long vintage;
     @Column(nullable = false)
-    private Long winery;
+    private String winery;
     @Column(nullable = false)
-    private Long type;
+    private String type;
     @Column(nullable = false)
-    private Long information;
+    private String information;
     @Column(nullable = false)
     private long recommendCount;
 
