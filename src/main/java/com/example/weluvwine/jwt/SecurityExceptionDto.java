@@ -1,4 +1,4 @@
-package com.example.weluvwine.exceptionDto;
+package com.example.weluvwine.jwt;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
