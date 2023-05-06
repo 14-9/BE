@@ -24,8 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-import static com.example.weluvwine.exception.ErrorCode.DUPLICATE_IDENTIFIER;
-import static com.example.weluvwine.exception.ErrorCode.USER_NOT_FOUND;
+import static com.example.weluvwine.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +47,11 @@ public class MemberService {
         Optional<Member> foundMember = memberRepository.findByMemberId(memberId);
         if (foundMember.isPresent()) {
             throw new CustomException(DUPLICATE_IDENTIFIER);
+        }
+        //중복 닉네임 체크
+        Optional<Member> foundMemberNickname = memberRepository.findByNickname(nickname);
+        if (foundMemberNickname.isPresent()) {
+            throw new CustomException(DUPLICATE_NICKNAME);
         }
 
         Member member = new Member(memberId, password, nickname);
