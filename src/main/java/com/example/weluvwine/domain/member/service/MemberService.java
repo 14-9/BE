@@ -56,7 +56,7 @@ public class MemberService {
 
         Member member = new Member(memberId, password, nickname);
         memberRepository.save(member);
-        Message message = Message.setSuccess(StatusEnum.OK, "회원가입 성공", foundMember);
+        Message message = Message.setSuccess(StatusEnum.OK, "회원가입 성공", member);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

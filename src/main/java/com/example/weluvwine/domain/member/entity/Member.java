@@ -1,5 +1,6 @@
 package com.example.weluvwine.domain.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Member {
     @Column(nullable = false)
     private String memberId;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
