@@ -1,5 +1,6 @@
 package com.example.weluvwine.wine.service;
 
+import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.util.Message;
 import com.example.weluvwine.util.StatusEnum;
 import com.example.weluvwine.wine.entity.Wine;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.example.weluvwine.exception.ErrorCode.WINE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +34,9 @@ public class WineService {
 
     @Transactional(readOnly = true)
     public ResponseEntity<Message> readWine(Long reviewId){
-        Wine wine = wineRepository.findById(reviewId).orElseThrow();
+        Wine wine = wineRepository.findById(reviewId).orElseThrow(
+                () -> new CustomException(WINE_NOT_FOUND)
+        );
         Message message = Message.setSuccess(StatusEnum.OK,"상세 페이지 조회 성공", wine);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
