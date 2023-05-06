@@ -3,14 +3,14 @@ package com.example.weluvwine.member.controller;
 import com.example.weluvwine.member.dto.LoginMemberRequestDto;
 import com.example.weluvwine.member.dto.SignupMemberRequestDto;
 import com.example.weluvwine.member.service.MemberService;
+import com.example.weluvwine.security.UserDetailsImpl;
 import com.example.weluvwine.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -33,10 +33,10 @@ public class MemberController {
         return memberService.login(requestDto, response);
     }
 
-    // 로그아웃
-//    @GetMapping("/logout")
-//    public ResponseEntity<Message> logout(@AuthenticationPrincipal MemberDetailsImpl memberDetails, HttpServletRequest request) {
-//        return memberService.logout(memberDetails.getMember(), request);
-//    }
+     //로그아웃
+    @GetMapping("/logout")
+    public ResponseEntity<Message> logout(@AuthenticationPrincipal UserDetailsImpl userDetails, HttpServletRequest request) {
+        return memberService.logout(userDetails.getMember(), request);
+    }
 
 }

@@ -9,6 +9,7 @@ import com.example.weluvwine.member.dto.LoginMemberRequestDto;
 import com.example.weluvwine.member.dto.SignupMemberRequestDto;
 import com.example.weluvwine.member.entity.Member;
 import com.example.weluvwine.member.repository.MemberRepository;
+import com.example.weluvwine.redis.redisUtil.RedisUtil;
 import com.example.weluvwine.util.Message;
 import com.example.weluvwine.util.StatusEnum;
 import com.sun.xml.bind.v2.model.core.Ref;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
@@ -33,6 +35,7 @@ public class MemberService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final RedisUtil redisUtil;
 
     // 회원가입
     @Transactional
@@ -88,10 +91,20 @@ public class MemberService {
     }
 
     //로그아웃
-//    @Transactional
-//    public ResponseEntity<Message> logout(LoginMemberRequestDto requestDto, HttpServletResponse response) {
-//
-//    }
+     @Transactional
+        public ResponseEntity<Message> logout(Member member, HttpServletRequest request) {
+            Optional<RefreshToken> refreshToken = refreshTokenRepository.findByMemberId(member.getMemberId());
+
+            String accessToken = request.getHeader("ACCESS_KEY").substring(7);
+            if(refreshToken.isPresent()){
+                Long tokenTime = jwtUtil.getExpirationTime(accessToken);
+                redisUtil.setBlackList(accessToken, "access_token", tokenTime);
+                refreshTokenRepository.deleteByMemberId(member.getMemberId());
+                Message message = Message.setSuccess(StatusEnum.OK,"로그아웃 성공", member.getMemberId());
+                return new ResponseEntity<>(message, HttpStatus.OK);
+            }
+            throw new CustomException(USER_NOT_FOUND);
+        }
 
     // 헤더 셋팅
     private void setHeader(HttpServletResponse response, TokenDto tokenDto) {

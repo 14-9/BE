@@ -2,6 +2,7 @@ package com.example.weluvwine.jwt;
 
 import com.example.weluvwine.jwt.refreshToken.RefreshToken;
 import com.example.weluvwine.jwt.refreshToken.RefreshTokenRepository;
+import com.example.weluvwine.redis.redisUtil.RedisUtil;
 import com.example.weluvwine.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -37,6 +38,7 @@ public class JwtUtil {
     public static final String REFRESH_KEY = "REFRESH_KEY";
     private static final long ACCESS_TIME = Duration.ofMinutes(30).toMillis();
     private static final long REFRESH_TIME = Duration.ofDays(14).toMillis();
+    private final RedisUtil redisUtil;
 
     @Value("${jwt.secret.key}")
     private String secretKey;
@@ -81,6 +83,8 @@ public class JwtUtil {
 
     // 토큰 검증
     public boolean validateToken(String token) {
+        if(redisUtil.hasKeyBlackList(token))
+            return false;
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
