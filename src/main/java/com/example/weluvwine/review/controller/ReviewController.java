@@ -5,6 +5,7 @@ import com.example.weluvwine.security.UserDetailsImpl;
 import com.example.weluvwine.util.Message;
 import com.example.weluvwine.review.dto.ReviewRequestDto;
 import com.example.weluvwine.review.service.ReviewService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/review")
+@Tag(name = "ReviewController", description = "리뷰 관련 API")
 public class ReviewController {
 
     private final ReviewService reviewService;
