@@ -1,5 +1,6 @@
 package com.example.weluvwine.recommend.service;
 
+import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.member.entity.Member;
 import com.example.weluvwine.recommend.entity.Recommend;
 import com.example.weluvwine.recommend.repository.RecommendRepository;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+
+import static com.example.weluvwine.exception.ErrorCode.WINE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +46,7 @@ public class RecommendService {
 
     public Wine findWineById(Long id) {
         return wineRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 와인이 존재하지 않습니다."));
+                () -> new CustomException(WINE_NOT_FOUND));
     }
 
 }

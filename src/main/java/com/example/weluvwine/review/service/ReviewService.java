@@ -1,5 +1,6 @@
 package com.example.weluvwine.review.service;
 
+import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.member.entity.Member;
 import com.example.weluvwine.review.dto.ReviewResponseDto;
 import com.example.weluvwine.util.Message;
@@ -15,8 +16,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import static com.example.weluvwine.exception.ErrorCode.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -63,18 +68,18 @@ public class ReviewService {
     //와인 존재 확인
     private Wine findWineById(Long id) {
         return wineRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 와인이 존재하지 않습니다."));
+                () -> new CustomException(WINE_NOT_FOUND));
     }
     //리뷰 유무 확인
     public Review findReviewById(Long id){
         return reviewRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 리뷰가 존재하지 않습니다."));
+                () -> new CustomException(POST_NOT_FOUND));
     }
     //작성자 리뷰 확인
 
     public void isUserReview(Review review, Member member){
         if(!review.getId().equals(member.getId())){
-            throw new IllegalArgumentException("리뷰 작성자만 수정, 삭제 가능합니다.");
+            throw new CustomException(NOT_AUTHORIZED_USER);
         }
     }
 }
