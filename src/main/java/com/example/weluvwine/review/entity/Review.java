@@ -4,6 +4,7 @@ import com.example.weluvwine.member.entity.Member;
 import com.example.weluvwine.review.dto.ReviewRequestDto;
 import com.example.weluvwine.util.Timestamped;
 import com.example.weluvwine.wine.entity.Wine;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
