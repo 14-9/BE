@@ -1,4 +1,5 @@
-package com.example.weluvwine.config;
+package com.example.weluvwine.security.config;
+
 
 import com.example.weluvwine.jwt.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
