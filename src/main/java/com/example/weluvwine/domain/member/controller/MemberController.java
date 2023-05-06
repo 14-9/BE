@@ -5,6 +5,7 @@ import com.example.weluvwine.domain.member.dto.SignupMemberRequestDto;
 import com.example.weluvwine.domain.member.service.MemberService;
 import com.example.weluvwine.security.auth.UserDetailsImpl;
 import com.example.weluvwine.util.Message;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,19 +24,19 @@ public class MemberController {
     private final MemberService memberService;
 
 
-    // 회원가입
+    @Operation(summary = "회원가입 메서드", description = "회원가입 메서드입니다.")
     @PostMapping("/signup")
     public ResponseEntity<Message> signup(@Valid @RequestBody SignupMemberRequestDto requestDto) {
         return memberService.signup(requestDto);
     }
 
-    // 로그인
+    @Operation(summary = "로그인 메서드", description = "로그인 메서드입니다.")
     @PostMapping("/login")
     public ResponseEntity<Message> login(@RequestBody LoginMemberRequestDto requestDto, HttpServletResponse response) {
         return memberService.login(requestDto, response);
     }
 
-     //로그아웃
+    @Operation(summary = "로그아웃 메서드", description = "로그아웃 메서드입니다.")
     @GetMapping("/logout")
     public ResponseEntity<Message> logout(@AuthenticationPrincipal UserDetailsImpl userDetails, HttpServletRequest request) {
         return memberService.logout(userDetails.getMember(), request);
