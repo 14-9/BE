@@ -58,9 +58,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 jwtExceptionHandler(response, "RefreshToken Expired.", HttpStatus.BAD_REQUEST.value());
                 return;
             }
+            // 다음 필터로 요청과 응답을 전달하여 필터 체인 계속 실행
+            filterChain.doFilter(request, response);
         }
-        // 다음 필터로 요청과 응답을 전달하여 필터 체인 계속 실행
-        filterChain.doFilter(request, response);
     }
 
     // 인증 객체를 생성하여 SecurityContext에 설정

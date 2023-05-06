@@ -65,7 +65,6 @@ public class WebSecurityConfig {
         http.authorizeRequests()
                 .antMatchers("/api/user/login").permitAll()
                 .antMatchers("/api/user/signup").permitAll()
-                .antMatchers("/api/read/**").permitAll()
                 //swagger
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
 
