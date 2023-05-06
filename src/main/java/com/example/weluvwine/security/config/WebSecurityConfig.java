@@ -78,8 +78,7 @@ public class WebSecurityConfig {
         http.cors();
 
         // JWT 인증/인가를 사용하기 위한 설정
-        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(jwtAuthFilter, ExceptionTranslationFilter.class);
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();
