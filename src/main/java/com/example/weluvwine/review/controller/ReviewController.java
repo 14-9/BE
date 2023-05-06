@@ -26,17 +26,17 @@ public class ReviewController {
         return reviewService.createPost(wineId, requestDto, userDetails.getMember());
     }
     //리뷰 수정
-    @PutMapping("/{review-id}/update")
+    @PutMapping("/{review-id}")
     public ResponseEntity<Message> updatePost(@PathVariable(name = "review-id")Long reviewId, @RequestBody ReviewRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return reviewService.updatePost(reviewId, requestDto, userDetails.getMember());
     }
     //리뷰 삭제
-    @DeleteMapping("/{review-id}/delete")
+    @DeleteMapping("/{review-id}")
     public ResponseEntity<Message> deletePost(@PathVariable(name = "review-id")Long reviewId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return reviewService.deletePost(reviewId, userDetails.getMember());
     }
     //마이페이지 조회
-    @GetMapping("/{member-id}/read")
+    @GetMapping("/{member-id}")
     public ResponseEntity<Message> getReviewList(@PathVariable(name = "member-id")Long memberId){
         return reviewService.getReviewList(memberId);
     }

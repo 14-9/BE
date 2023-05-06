@@ -23,7 +23,7 @@ public class WineController {
     public ResponseEntity<Message> searchWine(@RequestParam String searchKeyword, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return wineService.searchWine(searchKeyword);
     }
-    @GetMapping("/api/review/{reviewId}/read")
+    @GetMapping("/api/review/{reviewId}")
     public ResponseEntity<Message> readWine(@PathVariable Long reviewId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return wineService.readWine(reviewId);
     }
