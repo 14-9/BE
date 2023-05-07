@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping("/wine/user")
 @Tag(name = "MemberController", description = "유저 관련 API")
 public class MemberController {
     private final MemberService memberService;
