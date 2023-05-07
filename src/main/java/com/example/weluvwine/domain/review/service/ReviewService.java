@@ -59,7 +59,7 @@ public class ReviewService {
 
     //마이페이지 리뷰 조회
     public ResponseEntity<Message> getReviewList(Long memberId) {
-        List<ReviewResponseDto> reviewList = reviewRepository.findAllById(memberId).stream()
+        List<ReviewResponseDto> reviewList = reviewRepository.findAllByMemberId(memberId).stream()
                 .map(ReviewResponseDto::new).collect(Collectors.toList());
         Message message = Message.setSuccess(StatusEnum.OK,"요청 성공", reviewList);
         return new ResponseEntity<>(message, HttpStatus.OK);
