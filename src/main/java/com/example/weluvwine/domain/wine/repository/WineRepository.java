@@ -9,4 +9,5 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
     List<Wine> findByNameContaining(String searchKeyword);
 
     List<Wine> findTop8ByOrderByRecommendCountDesc();
+    List<Wine> findTop8ByOrderByVintageAsc();
 }

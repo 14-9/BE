@@ -25,7 +25,7 @@ public class Wine {
     private String winery;
     @Column(nullable = false)
     private String type;
-    @Column(nullable = false)
+    @Column(nullable = false,columnDefinition = "text")
     private String information;
     @Column(nullable = false)
     @ColumnDefault("0")

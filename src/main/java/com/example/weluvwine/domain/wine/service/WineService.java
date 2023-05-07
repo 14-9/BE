@@ -57,4 +57,10 @@ public class WineService {
         Message message = Message.setSuccess(StatusEnum.OK,"랭킹 조회 성공", topWineList);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+    @Transactional(readOnly = true)
+    public ResponseEntity<Message> searchRead(){
+        List<Wine> vintageList = wineRepository.findTop8ByOrderByVintageAsc();
+        Message message = Message.setSuccess(StatusEnum.OK,"검색 페이지 조회 성공",vintageList);
+        return new ResponseEntity<>(message,HttpStatus.OK);
+    }
 }
