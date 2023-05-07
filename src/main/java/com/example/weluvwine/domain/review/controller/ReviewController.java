@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/wine")
 @Tag(name = "ReviewController", description = "리뷰 관련 API")
 public class ReviewController {
 
@@ -34,9 +34,9 @@ public class ReviewController {
         return reviewService.deletePost(reviewId, userDetails.getMember());
     }
     @Operation(summary = "마이페이지 조회 메서드", description = "마이페이지 조회 메서드입니다.")
-    @GetMapping("/mypage/{member-id}")
-    public ResponseEntity<Message> getReviewList(@PathVariable(name = "member-id")Long memberId){
-        return reviewService.getReviewList(memberId);
+    @GetMapping("/mypage")
+    public ResponseEntity<Message> getReviewList(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return reviewService.getReviewList(userDetails.getMember().getId());
     }
 }
 
