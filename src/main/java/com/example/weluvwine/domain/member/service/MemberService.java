@@ -1,11 +1,11 @@
 package com.example.weluvwine.domain.member.service;
 
 
-import com.example.weluvwine.domain.exception.CustomException;
 import com.example.weluvwine.domain.member.dto.LoginMemberRequestDto;
 import com.example.weluvwine.domain.member.dto.SignupMemberRequestDto;
 import com.example.weluvwine.domain.member.entity.Member;
 import com.example.weluvwine.domain.member.repository.MemberRepository;
+import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.redis.util.RedisUtil;
 import com.example.weluvwine.security.jwt.JwtUtil;
 import com.example.weluvwine.security.jwt.TokenDto;
@@ -24,7 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-import static com.example.weluvwine.domain.exception.ErrorCode.*;
+import static com.example.weluvwine.exception.ErrorCode.*;
+
 
 @Service
 @RequiredArgsConstructor

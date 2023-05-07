@@ -2,6 +2,7 @@ package com.example.weluvwine.domain.recommend.controller;
 
 import com.example.weluvwine.domain.recommend.service.RecommendService;
 import com.example.weluvwine.security.auth.UserDetailsImpl;
+import com.example.weluvwine.util.Message;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,8 @@ public class RecommendController {
     private final RecommendService recommendService;
 
     @Operation(summary = "추천하기 메서드", description = "추천하기 메서드입니다.")
-    @PostMapping("/api/recommend/{wine-id}")
-    public ResponseEntity recommendWine(@PathVariable(name = "wine-id") Long wineId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    @PostMapping("/wine/recommend/{wine-id}")
+    public ResponseEntity<Message> recommendWine(@PathVariable(name = "wine-id") Long wineId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return recommendService.recommendWine(wineId, userDetails.getMember());
     }
 }

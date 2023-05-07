@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping("/wine/user")
 @Tag(name = "MemberController", description = "유저 관련 API")
 public class MemberController {
     private final MemberService memberService;
@@ -37,7 +37,7 @@ public class MemberController {
     }
 
     @Operation(summary = "로그아웃 메서드", description = "로그아웃 메서드입니다.")
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public ResponseEntity<Message> logout(@AuthenticationPrincipal UserDetailsImpl userDetails, HttpServletRequest request) {
         return memberService.logout(userDetails.getMember(), request);
     }
