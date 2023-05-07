@@ -44,8 +44,8 @@ public class WineService {
         Wine wine = wineRepository.findById(wineId).orElseThrow(
                 () -> new CustomException(WINE_NOT_FOUND)
         );
-        List<Review> review = reviewRepository.findAllByWineIdOrderByCreatedAtDesc(wineId);
-        List<ReviewListResponseDto> reviewListResponseDto = review.stream().map(ReviewListResponseDto::new).collect(Collectors.toList());
+        List<ReviewListResponseDto> reviewListResponseDto = reviewRepository.findAllByWineIdOrderByCreatedAtDesc(wineId)
+                .stream().map(ReviewListResponseDto::new).collect(Collectors.toList());
         WineDetailPageResponseDto dto = new WineDetailPageResponseDto(wine, reviewListResponseDto);
         Message message = Message.setSuccess(StatusEnum.OK,"상세 페이지 조회 성공", dto);
         return new ResponseEntity<>(message, HttpStatus.OK);
