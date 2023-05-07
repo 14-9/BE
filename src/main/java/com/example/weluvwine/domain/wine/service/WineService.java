@@ -1,8 +1,8 @@
 package com.example.weluvwine.domain.wine.service;
 
-import com.example.weluvwine.domain.exception.CustomException;
 import com.example.weluvwine.domain.wine.entity.Wine;
 import com.example.weluvwine.domain.wine.repository.WineRepository;
+import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.util.Message;
 import com.example.weluvwine.util.StatusEnum;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.example.weluvwine.domain.exception.ErrorCode.WINE_NOT_FOUND;
+import static com.example.weluvwine.exception.ErrorCode.WINE_NOT_FOUND;
 
 
 @Service

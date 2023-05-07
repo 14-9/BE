@@ -1,4 +1,4 @@
-package com.example.weluvwine.domain.exception;
+package com.example.weluvwine.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
