@@ -1,6 +1,5 @@
 package com.example.weluvwine.domain.review.service;
 
-import com.example.weluvwine.domain.exception.CustomException;
 import com.example.weluvwine.domain.member.entity.Member;
 import com.example.weluvwine.domain.review.dto.ReviewRequestDto;
 import com.example.weluvwine.domain.review.dto.ReviewResponseDto;
@@ -8,6 +7,7 @@ import com.example.weluvwine.domain.review.entity.Review;
 import com.example.weluvwine.domain.review.repository.ReviewRepository;
 import com.example.weluvwine.domain.wine.entity.Wine;
 import com.example.weluvwine.domain.wine.repository.WineRepository;
+import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.util.Message;
 import com.example.weluvwine.util.StatusEnum;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.weluvwine.domain.exception.ErrorCode.*;
+import static com.example.weluvwine.exception.ErrorCode.*;
 
 
 @Service

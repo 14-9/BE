@@ -23,9 +23,9 @@ public class WineController {
         return wineService.searchWine(searchKeyword);
     }
     @Operation(summary = "와인상세조회 메서드", description = "와인상세조회 메서드입니다.")
-    @GetMapping("/review/{review-id}")
-    public ResponseEntity<Message> readWine(@PathVariable(name = "review-id") Long reviewId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return wineService.readWine(reviewId);
+    @GetMapping("/review/{wine-id}")
+    public ResponseEntity<Message> readWine(@PathVariable(name = "wine-id") Long wineId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return wineService.readWine(wineId);
     }
     @Operation(summary = "와인랭킹 조회 메서드", description = "와인랭킹 조회 메서드입니다.")
     @GetMapping("/rank")
