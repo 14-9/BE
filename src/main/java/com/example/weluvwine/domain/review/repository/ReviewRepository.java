@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-    List<Review> findAllById(Long memberId);
+
     List<Review> findAllByWineId(Long wineId);
+
+    List<Review> findAllByMemberId(Long memberId);
+
 }
