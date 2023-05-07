@@ -7,16 +7,18 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class ReviewResponseDto {
+public class ReviewListResponseDto {
     private Long id;
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private Member member;
 
-    public ReviewResponseDto(Review review){
+    public ReviewListResponseDto(Review review){
         this.id = review.getId();
         this.content = review.getContent();
         this.createdAt = review.getCreatedAt();
         this.modifiedAt = review.getModifiedAt();
+        this.member = review.getMember();
     }
 }
