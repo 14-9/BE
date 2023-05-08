@@ -30,4 +30,5 @@ public class GlobalExceptionHandler {
         }
         return ErrorResponse.toResponseEntityValid(sb.toString(), HttpStatus.BAD_REQUEST);
     }
+
 }
