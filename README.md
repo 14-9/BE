@@ -3,8 +3,25 @@
 > 항해99 14기 9조 주특기 mini 프로젝트 <br>
 > 와인을 좋아하는 사람들 모두 모여라~ 내게 좋은 추억을 전해준 와인을 너에게도 알려줄게!<br>
 > 와인에 대한 이야기를 나눌 수 있는 공간입니다. 
-<br>
 
+# ⚙️ Tech Stack
+<br>
+<div align=center> 
+<img src="https://img.shields.io/badge/JAVA-E34F26?style=for-the-badge&logo=JAVA&logoColor=white">
+<img src="https://img.shields.io/badge/PYTHON-3776AB?style=for-the-badge&logo=PYTHON&logoColor=white">
+<img src="https://img.shields.io/badge/SPRING BOOT-6DB33F?style=for-the-badge&logo=SPRING BOOT&logoColor=white">
+<img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white">
+<img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white">
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+<img src="https://img.shields.io/badge/junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white">
+</div>
+
+<br>
 
 ## 💻 9조의 S.A가 궁금하다면?
 https://kaput-birth-81b.notion.site/S-A-b5c42c60c43c4298bd123ecd03e12de1
@@ -13,7 +30,7 @@ https://kaput-birth-81b.notion.site/S-A-b5c42c60c43c4298bd123ecd03e12de1
 ## 📖 ERD
 <div align="center">
 
-![image](https://user-images.githubusercontent.com/102853354/236614435-82c05df7-6c87-4056-9aa3-638e781b6714.png)
+![image](https://user-images.githubusercontent.com/102853354/236878245-8fe36ff4-9e56-470a-a5f5-be1004e04489.png)
 
 </div>
   <br>
