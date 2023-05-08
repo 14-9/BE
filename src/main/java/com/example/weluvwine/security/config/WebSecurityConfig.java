@@ -48,7 +48,7 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers(PathRequest.toH2Console())
+//                .requestMatchers(PathRequest.toH2Console())
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
@@ -63,6 +63,7 @@ public class WebSecurityConfig {
         http.authorizeRequests()
                 .antMatchers("/wine/user/login").permitAll()
                 .antMatchers("/wine/user/signup").permitAll()
+                .antMatchers("/wine/rank").permitAll()
                 //swagger
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
                 .anyRequest().authenticated();
