@@ -30,7 +30,7 @@ public class ReviewService {
     private final WineRepository wineRepository;
 
     //리뷰 작성
-    public ResponseEntity<Message> createPost(Long wineId, ReviewRequestDto requestDto, Member member) {
+    public ResponseEntity<Message> createReview(Long wineId, ReviewRequestDto requestDto, Member member) {
         Wine wine = findWineById(wineId);
         Review review = new Review(requestDto, member, wine);
         reviewRepository.save(review);
@@ -39,7 +39,7 @@ public class ReviewService {
     }
 
     //리뷰 수정
-    public ResponseEntity<Message> updatePost(Long reviewId, ReviewRequestDto requestDto, Member member){
+    public ResponseEntity<Message> updateReview(Long reviewId, ReviewRequestDto requestDto, Member member){
         Review review = findReviewById(reviewId);
         isUserReview(review, member);
         review.update(requestDto);
@@ -47,7 +47,7 @@ public class ReviewService {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
     //리뷰 삭제
-    public ResponseEntity<Message> deletePost(Long reviewId, Member member){
+    public ResponseEntity<Message> deleteReview(Long reviewId, Member member){
         Review review = findReviewById(reviewId);
         isUserReview(review, member);
         reviewRepository.deleteById(reviewId);
