@@ -2,7 +2,6 @@ package com.example.weluvwine.domain.review.service;
 
 import com.example.weluvwine.domain.member.entity.Member;
 import com.example.weluvwine.domain.review.dto.ReviewRequestDto;
-import com.example.weluvwine.domain.review.dto.ReviewResponseDto;
 import com.example.weluvwine.domain.review.entity.Review;
 import com.example.weluvwine.domain.review.repository.ReviewRepository;
 import com.example.weluvwine.domain.wine.entity.Wine;
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.example.weluvwine.exception.ErrorCode.*;
 
@@ -32,7 +30,7 @@ public class ReviewService {
     private final WineRepository wineRepository;
 
     //리뷰 작성
-    public ResponseEntity<Message> createPost(Long wineId, ReviewRequestDto requestDto, Member member) {
+    public ResponseEntity<Message> createReview(Long wineId, ReviewRequestDto requestDto, Member member) {
         Wine wine = findWineById(wineId);
         Review review = new Review(requestDto, member, wine);
         reviewRepository.save(review);
@@ -41,7 +39,7 @@ public class ReviewService {
     }
 
     //리뷰 수정
-    public ResponseEntity<Message> updatePost(Long reviewId, ReviewRequestDto requestDto, Member member){
+    public ResponseEntity<Message> updateReview(Long reviewId, ReviewRequestDto requestDto, Member member){
         Review review = findReviewById(reviewId);
         isUserReview(review, member);
         review.update(requestDto);
@@ -49,7 +47,7 @@ public class ReviewService {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
     //리뷰 삭제
-    public ResponseEntity<Message> deletePost(Long reviewId, Member member){
+    public ResponseEntity<Message> deleteReview(Long reviewId, Member member){
         Review review = findReviewById(reviewId);
         isUserReview(review, member);
         reviewRepository.deleteById(reviewId);
@@ -59,9 +57,10 @@ public class ReviewService {
 
     //마이페이지 리뷰 조회
     public ResponseEntity<Message> getReviewList(Long memberId) {
-        List<ReviewResponseDto> reviewList = reviewRepository.findAllByMemberId(memberId).stream()
-                .map(ReviewResponseDto::new).collect(Collectors.toList());
-        Message message = Message.setSuccess(StatusEnum.OK,"요청 성공", reviewList);
+        List<Review> reviewList = reviewRepository.findAllByMemberId(memberId);
+        Message message;
+        if(reviewList.size() == 0) message = Message.setSuccess(StatusEnum.OK,"비어 있음");
+        else message = Message.setSuccess(StatusEnum.OK,"요청 성공", reviewList);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

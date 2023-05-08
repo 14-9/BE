@@ -9,8 +9,8 @@ import java.util.List;
 @Getter
 public class WineDetailPageResponseDto {
 
-    private Object wine;
-    private Object review;
+    private Wine wine;
+    private List<ReviewListResponseDto> review;
 
     public WineDetailPageResponseDto(Wine wine, List<ReviewListResponseDto> review){
         this.wine = wine;
