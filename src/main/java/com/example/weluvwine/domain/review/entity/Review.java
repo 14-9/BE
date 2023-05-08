@@ -7,12 +7,14 @@ import com.example.weluvwine.util.Timestamped;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@Where(clause = "is_deleted = false")
 @SQLDelete(sql = "UPDATE review SET is_deleted = true WHERE id = ? ")
 public class Review extends Timestamped {
     @Id
@@ -30,13 +32,13 @@ public class Review extends Timestamped {
 
     private boolean isDeleted = Boolean.FALSE;
 
-    public Review (ReviewRequestDto requestDto, Member member, Wine wine){
+    public Review(ReviewRequestDto requestDto, Member member, Wine wine) {
         this.content = requestDto.getContent();
         this.member = member;
         this.wine = wine;
     }
 
-    public void update(ReviewRequestDto requestDto){
+    public void update(ReviewRequestDto requestDto) {
         this.content = requestDto.getContent();
     }
 }
