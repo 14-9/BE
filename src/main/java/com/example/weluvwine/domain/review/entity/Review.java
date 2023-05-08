@@ -6,12 +6,14 @@ import com.example.weluvwine.domain.wine.entity.Wine;
 import com.example.weluvwine.util.Timestamped;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE review SET is_deleted = true WHERE id = ? ")
 public class Review extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +27,8 @@ public class Review extends Timestamped {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Wine wine;
+
+    private boolean isDeleted = Boolean.FALSE;
 
     public Review (ReviewRequestDto requestDto, Member member, Wine wine){
         this.content = requestDto.getContent();
