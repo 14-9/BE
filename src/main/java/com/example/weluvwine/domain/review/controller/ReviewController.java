@@ -20,18 +20,18 @@ public class ReviewController {
     private final ReviewService reviewService;
     @Operation(summary = "리뷰작성 메서드", description = "리뷰작성 메서드입니다.")
     @PostMapping("/review/{wine-id}")
-    public ResponseEntity<Message> createPost(@PathVariable(name = "wine-id")Long wineId, @RequestBody ReviewRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return reviewService.createPost(wineId, requestDto, userDetails.getMember());
+    public ResponseEntity<Message> createReview(@PathVariable(name = "wine-id")Long wineId, @RequestBody ReviewRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return reviewService.createReview(wineId, requestDto, userDetails.getMember());
     }
     @Operation(summary = "리뷰수정 메서드", description = "리뷰수정 메서드입니다.")
     @PutMapping("/review/{review-id}")
-    public ResponseEntity<Message> updatePost(@PathVariable(name = "review-id")Long reviewId, @RequestBody ReviewRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return reviewService.updatePost(reviewId, requestDto, userDetails.getMember());
+    public ResponseEntity<Message> updateReview(@PathVariable(name = "review-id")Long reviewId, @RequestBody ReviewRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return reviewService.updateReview(reviewId, requestDto, userDetails.getMember());
     }
     @Operation(summary = "리뷰삭제 메서드", description = "리뷰삭제 메서드입니다.")
     @DeleteMapping("/review/{review-id}")
-    public ResponseEntity<Message> deletePost(@PathVariable(name = "review-id")Long reviewId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return reviewService.deletePost(reviewId, userDetails.getMember());
+    public ResponseEntity<Message> deleteReview(@PathVariable(name = "review-id")Long reviewId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return reviewService.deleteReview(reviewId, userDetails.getMember());
     }
     @Operation(summary = "마이페이지 조회 메서드", description = "마이페이지 조회 메서드입니다.")
     @GetMapping("/mypage")
