@@ -22,18 +22,21 @@ public class WineController {
     public ResponseEntity<Message> searchWine(@RequestParam String searchKeyword, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return wineService.searchWine(searchKeyword);
     }
+
+    @Operation(summary = "검색페이지 조회 메서드" , description = "검색창 실행시 와인 정보입니다.")
+    @GetMapping("/search/read")
+    public ResponseEntity<Message> searchRead(){return wineService.searchRead();}
+
+
     @Operation(summary = "와인상세조회 메서드", description = "와인상세조회 메서드입니다.")
     @GetMapping("/review/{wine-id}")
     public ResponseEntity<Message> readWine(@PathVariable(name = "wine-id") Long wineId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return wineService.readWine(wineId);
     }
+
     @Operation(summary = "와인랭킹 조회 메서드", description = "와인랭킹 조회 메서드입니다.")
     @GetMapping("/rank")
     public ResponseEntity<Message> rankWine(){
         return wineService.rankWine();
     }
-
-    @Operation(summary = "검색페이지 조회 메서드" , description = "검색창 실행시 와인 정보입니다.")
-    @GetMapping("/api/search/read")
-    public ResponseEntity<Message> searchRead(){return wineService.searchRead();}
 }
