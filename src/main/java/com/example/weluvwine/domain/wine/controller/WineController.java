@@ -36,4 +36,11 @@ public class WineController {
     @Operation(summary = "검색페이지 조회 메서드" , description = "검색창 실행시 와인 정보입니다.")
     @GetMapping("/api/search/read")
     public ResponseEntity<Message> searchRead(){return wineService.searchRead();}
+
+    @Operation(summary = "카테고리 조회 메서드" , description = "검색창 실행시 와인 정보입니다.")
+    @GetMapping("/search/style")
+    public ResponseEntity<Message>searchStyle(WineType wineType)
+    {
+        return wineService.searchStyle(wineType);
+    }
 }
