@@ -10,10 +10,12 @@ import java.util.List;
 public class WineDetailPageResponseDto {
 
     private Wine wine;
+    private boolean recommend;
     private List<ReviewListResponseDto> review;
 
-    public WineDetailPageResponseDto(Wine wine, List<ReviewListResponseDto> review){
+    public WineDetailPageResponseDto(Wine wine, boolean recommend, List<ReviewListResponseDto> review){
         this.wine = wine;
+        this.recommend = recommend;
         this.review = review;
     }
 }
