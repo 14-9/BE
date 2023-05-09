@@ -10,4 +10,5 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
 
     List<Wine> findTop8ByOrderByRecommendCountDesc();
     List<Wine> findTop8ByOrderByVintageAsc();
+    List<Wine> findTop8ByTypeOrderByVintageAsc(WineType type);
 }
