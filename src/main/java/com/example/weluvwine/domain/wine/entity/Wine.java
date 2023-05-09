@@ -24,7 +24,8 @@ public class Wine {
     @Column(nullable = false)
     private String winery;
     @Column(nullable = false)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private WineType type;
     @Column(nullable = false,columnDefinition = "text")
     private String information;
     @Column(nullable = false)
