@@ -1,6 +1,7 @@
 package com.example.weluvwine.domain.wine.repository;
 
 import com.example.weluvwine.domain.wine.entity.Wine;
+import com.example.weluvwine.domain.wine.entity.WineType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

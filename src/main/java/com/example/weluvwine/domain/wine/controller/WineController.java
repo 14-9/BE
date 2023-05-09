@@ -1,5 +1,6 @@
 package com.example.weluvwine.domain.wine.controller;
 
+import com.example.weluvwine.domain.wine.entity.WineType;
 import com.example.weluvwine.domain.wine.service.WineService;
 import com.example.weluvwine.security.auth.UserDetailsImpl;
 import com.example.weluvwine.util.Message;

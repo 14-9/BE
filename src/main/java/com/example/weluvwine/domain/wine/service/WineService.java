@@ -5,6 +5,7 @@ import com.example.weluvwine.domain.review.entity.Review;
 import com.example.weluvwine.domain.review.repository.ReviewRepository;
 import com.example.weluvwine.domain.wine.dto.WineDetailPageResponseDto;
 import com.example.weluvwine.domain.wine.entity.Wine;
+import com.example.weluvwine.domain.wine.entity.WineType;
 import com.example.weluvwine.domain.wine.repository.WineRepository;
 import com.example.weluvwine.exception.CustomException;
 import com.example.weluvwine.util.Message;
