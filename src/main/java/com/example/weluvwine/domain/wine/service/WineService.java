@@ -1,5 +1,8 @@
 package com.example.weluvwine.domain.wine.service;
 
+import com.example.weluvwine.domain.member.entity.Member;
+import com.example.weluvwine.domain.recommend.repository.RecommendRepository;
+import com.example.weluvwine.domain.recommend.service.RecommendService;
 import com.example.weluvwine.domain.review.dto.ReviewListResponseDto;
 import com.example.weluvwine.domain.review.entity.Review;
 import com.example.weluvwine.domain.review.repository.ReviewRepository;
@@ -27,6 +30,7 @@ import static com.example.weluvwine.exception.ErrorCode.WINE_NOT_FOUND;
 public class WineService {
     private final WineRepository wineRepository;
     private final ReviewRepository reviewRepository;
+    private final RecommendRepository recommendRepository;
 
     @Transactional(readOnly = true)
     public ResponseEntity<Message> searchWine(String searchKeyword){
@@ -41,13 +45,14 @@ public class WineService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Message> readWine(Long wineId){
+    public ResponseEntity<Message> readWine(Long wineId, Long memberId){
         Wine wine = wineRepository.findById(wineId).orElseThrow(
                 () -> new CustomException(WINE_NOT_FOUND)
         );
         List<ReviewListResponseDto> reviewListResponseDto = reviewRepository.findAllByWineIdOrderByCreatedAtDesc(wineId)
                 .stream().map(ReviewListResponseDto::new).collect(Collectors.toList());
-        WineDetailPageResponseDto dto = new WineDetailPageResponseDto(wine, reviewListResponseDto);
+        boolean recommended = recommendRepository.findByWineIdAndMemberId(wineId, memberId).isPresent();
+        WineDetailPageResponseDto dto = new WineDetailPageResponseDto(wine, recommended, reviewListResponseDto);
         Message message = Message.setSuccess(StatusEnum.OK,"상세 페이지 조회 성공", dto);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }

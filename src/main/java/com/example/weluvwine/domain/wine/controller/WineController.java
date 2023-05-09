@@ -33,7 +33,7 @@ public class WineController {
     @Operation(summary = "와인상세조회 메서드", description = "와인상세조회 메서드입니다.")
     @GetMapping("/review/{wine-id}")
     public ResponseEntity<Message> readWine(@PathVariable(name = "wine-id") Long wineId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return wineService.readWine(wineId);
+        return wineService.readWine(wineId, userDetails.getMember().getId());
     }
 
     @Operation(summary = "와인랭킹 조회 메서드", description = "와인랭킹 조회 메서드입니다.")
