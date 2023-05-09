@@ -75,7 +75,7 @@ public class MemberService {
 
         // 비밀번호 check
         if (!passwordEncoder.matches(password, foundMember.getPassword())) {
-            throw new CustomException(USER_NOT_FOUND);
+            throw new CustomException(INVALID_PASSWORD);
         }
         //아이디 정보로 토큰 생성
         TokenDto tokenDto = jwtUtil.createAllToken(memberId);
