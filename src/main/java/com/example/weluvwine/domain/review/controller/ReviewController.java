@@ -36,7 +36,7 @@ public class ReviewController {
     @Operation(summary = "마이페이지 조회 메서드", description = "마이페이지 조회 메서드입니다.")
     @GetMapping("/mypage")
     public ResponseEntity<Message> getReviewList(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return reviewService.getReviewList(userDetails.getMember().getId());
+        return reviewService.getReviewList(userDetails.getMember());
     }
 }
 

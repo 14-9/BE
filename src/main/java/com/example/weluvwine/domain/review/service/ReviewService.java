@@ -1,6 +1,7 @@
 package com.example.weluvwine.domain.review.service;
 
 import com.example.weluvwine.domain.member.entity.Member;
+import com.example.weluvwine.domain.member.repository.MemberRepository;
 import com.example.weluvwine.domain.review.dto.ReviewRequestDto;
 import com.example.weluvwine.domain.review.entity.Review;
 import com.example.weluvwine.domain.review.repository.ReviewRepository;
@@ -28,6 +29,7 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final WineRepository wineRepository;
+    private final MemberRepository memberRepository;
 
     //리뷰 작성
     public ResponseEntity<Message> createReview(Long wineId, ReviewRequestDto requestDto, Member member) {
@@ -64,11 +66,11 @@ public class ReviewService {
     }
 
     //마이페이지 리뷰 조회
-    public ResponseEntity<Message> getReviewList(Long memberId) {
-        List<Review> reviewList = reviewRepository.findAllByMemberId(memberId);
+    public ResponseEntity<Message> getReviewList(Member member) {
+        List<Review> reviewList = reviewRepository.findAllByMemberId(member.getId());
         Message message;
-        if (reviewList.size() == 0) message = Message.setSuccess(StatusEnum.OK, "비어 있음");
-        else message = Message.setSuccess(StatusEnum.OK, "요청 성공", reviewList);
+        if(reviewList.size() == 0) message = Message.setSuccess(StatusEnum.OK,"비어 있음", member);
+        else message = Message.setSuccess(StatusEnum.OK,"요청 성공", reviewList);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
