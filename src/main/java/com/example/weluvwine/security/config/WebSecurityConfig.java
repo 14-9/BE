@@ -88,7 +88,7 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
 
-        config.addAllowedOrigin("http://locahost:8080");
+        config.addAllowedOrigin("http://localhost:3000");
 
         config.addExposedHeader(JwtUtil.AUTHORIZATION_HEADER);
 
