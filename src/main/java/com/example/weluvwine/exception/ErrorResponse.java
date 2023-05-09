@@ -32,4 +32,14 @@ public class ErrorResponse {
                         .build()
                 );
     }
+
+    public static ResponseEntity<ErrorResponse> toResponseEntity(HttpStatus httpStatus) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ErrorResponse.builder()
+                        .message(httpStatus.name())
+                        .status(httpStatus.value())
+                        .build()
+                );
+    }
 }
