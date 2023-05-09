@@ -28,18 +28,20 @@ public class RecommendService {
 
     public ResponseEntity<Message> recommendWine(Long wineId, Member member) {
         Wine wine = findWineById(wineId);
-        Optional<Recommend> findRecommend = recommendRepository.findByWineIdAndMemberId(wineId,member.getId());
-        if(findRecommend.isPresent()){
+        Optional<Recommend> findRecommend = recommendRepository.findByWineIdAndMemberId(wineId, member.getId());
+        if (findRecommend.isPresent()) {
             Recommend recommend = findRecommend.get();
             recommendRepository.delete(recommend);
-            wine.setRecommendCount(wine.getRecommendCount()-1);
-            Message message = Message.setSuccess(StatusEnum.OK, "추천을 취소하였습니다.",null);
+            wine.setRecommendCount(wine.getRecommendCount() - 1);
+            long totalRecommendCount = wine.getRecommendCount();
+            Message message = Message.setSuccess(StatusEnum.OK, "추천을 취소하였습니다.", totalRecommendCount);
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
             Recommend recommend = new Recommend(wine, member);
             recommendRepository.save(recommend);
-            wine.setRecommendCount(wine.getRecommendCount()+1);
-            Message message = Message.setSuccess(StatusEnum.OK, "추천 성공!",null);
+            wine.setRecommendCount(wine.getRecommendCount() + 1);
+            long totalRecommendCount = wine.getRecommendCount();
+            Message message = Message.setSuccess(StatusEnum.OK, "추천 성공!", totalRecommendCount);
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
 
