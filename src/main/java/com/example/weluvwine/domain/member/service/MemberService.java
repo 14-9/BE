@@ -75,7 +75,7 @@ public class MemberService {
 
         // 비밀번호 check
         if (!passwordEncoder.matches(password, foundMember.getPassword())) {
-            throw new CustomException(USER_NOT_FOUND);
+            throw new CustomException(INVALID_PASSWORD);
         }
         //아이디 정보로 토큰 생성
         TokenDto tokenDto = jwtUtil.createAllToken(memberId);
@@ -114,7 +114,7 @@ public class MemberService {
     // 헤더 셋팅
     private void setHeader(HttpServletResponse response, TokenDto tokenDto) {
         response.addHeader(JwtUtil.ACCESS_KEY, tokenDto.getAccessToken());
-        response.addHeader(JwtUtil.REFRESH_KEY, tokenDto.getRefreshToken());
+//        response.addHeader(JwtUtil.REFRESH_KEY, tokenDto.getRefreshToken());
     }
 
 }

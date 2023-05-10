@@ -1,6 +1,7 @@
 package com.example.weluvwine.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -30,5 +31,14 @@ public class GlobalExceptionHandler {
         }
         return ErrorResponse.toResponseEntityValid(sb.toString(), HttpStatus.BAD_REQUEST);
     }
-
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e){
+        e.printStackTrace();
+        return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
+    }
+    @ExceptionHandler(value = RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e){
+        e.printStackTrace();
+        return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
+    }
 }

@@ -30,13 +30,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtUtil {
 
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    // 사용자 권한 값의 KEY
-    public static final String AUTHORIZATION_KEY = "auth";
     private static final String BEARER_PREFIX = "Bearer ";
     public static final String ACCESS_KEY = "ACCESS_KEY";
     public static final String REFRESH_KEY = "REFRESH_KEY";
-    private static final long ACCESS_TIME = Duration.ofMinutes(30).toMillis();
+    private static final long ACCESS_TIME = Duration.ofMinutes(60).toMillis();
     private static final long REFRESH_TIME = Duration.ofDays(14).toMillis();
     private final RedisUtil redisUtil;
 
