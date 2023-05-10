@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 public class ErrorResponse {
     private String message;
     private int status;
+    private String detail;
 
     // 에러 반환 형식
     public static ResponseEntity<ErrorResponse> toResponseEntity(ErrorCode errorCode) {
@@ -33,11 +34,12 @@ public class ErrorResponse {
                 );
     }
 
-    public static ResponseEntity<ErrorResponse> toResponseEntity(HttpStatus httpStatus) {
+    public static ResponseEntity<ErrorResponse> toResponseEntity(HttpStatus httpStatus, String detail) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ErrorResponse.builder()
                         .message(httpStatus.name())
+                        .detail(detail)
                         .status(httpStatus.value())
                         .build()
                 );
