@@ -96,20 +96,20 @@ public class MemberService {
     }
 
     //로그아웃
-     @Transactional
-        public ResponseEntity<Message> logout(Member member, HttpServletRequest request) {
-            Optional<RefreshToken> refreshToken = refreshTokenRepository.findByMemberId(member.getMemberId());
+    @Transactional
+    public ResponseEntity<Message> logout(Member member, HttpServletRequest request) {
+        Optional<RefreshToken> refreshToken = refreshTokenRepository.findByMemberId(member.getMemberId());
 
-            String accessToken = request.getHeader("ACCESS_KEY").substring(7);
-            if(refreshToken.isPresent()){
-                Long tokenTime = jwtUtil.getExpirationTime(accessToken);
-                redisUtil.setBlackList(accessToken, "access_token", tokenTime);
-                refreshTokenRepository.deleteByMemberId(member.getMemberId());
-                Message message = Message.setSuccess(StatusEnum.OK,"로그아웃 성공", member.getMemberId());
-                return new ResponseEntity<>(message, HttpStatus.OK);
-            }
-            throw new CustomException(USER_NOT_FOUND);
+        String accessToken = request.getHeader("ACCESS_KEY").substring(7);
+        if(refreshToken.isPresent()){
+            Long tokenTime = jwtUtil.getExpirationTime(accessToken);
+            redisUtil.setBlackList(accessToken, "access_token", tokenTime);
+            refreshTokenRepository.deleteByMemberId(member.getMemberId());
+            Message message = Message.setSuccess(StatusEnum.OK,"로그아웃 성공", member.getMemberId());
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
+        throw new CustomException(USER_NOT_FOUND);
+    }
 
     // 헤더 셋팅
     private void setHeader(HttpServletResponse response, TokenDto tokenDto) {

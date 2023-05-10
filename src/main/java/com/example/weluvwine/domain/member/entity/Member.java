@@ -28,11 +28,23 @@ public class Member {
 
     @Column(nullable = false)
     private String nickname;
+//    @Column(nullable = false)
+//    private String email;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "email_code_id")
+//    private EmailCode emailCode;
+//
+//    private boolean emailVerified = false;
+
 
 
     public Member(String memberId, String password, String nickname) {
         this.memberId = memberId;
         this.password = password;
         this.nickname = nickname;
+
     }
+
+
+
 }
