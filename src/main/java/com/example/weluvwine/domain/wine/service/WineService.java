@@ -1,10 +1,9 @@
 package com.example.weluvwine.domain.wine.service;
 
 import com.example.weluvwine.domain.member.entity.Member;
+import com.example.weluvwine.domain.member.repository.MemberRepository;
 import com.example.weluvwine.domain.recommend.repository.RecommendRepository;
-import com.example.weluvwine.domain.recommend.service.RecommendService;
 import com.example.weluvwine.domain.review.dto.ReviewListResponseDto;
-import com.example.weluvwine.domain.review.entity.Review;
 import com.example.weluvwine.domain.review.repository.ReviewRepository;
 import com.example.weluvwine.domain.wine.dto.WineDetailPageResponseDto;
 import com.example.weluvwine.domain.wine.entity.Wine;
@@ -20,8 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.example.weluvwine.exception.ErrorCode.USER_NOT_FOUND;
 import static com.example.weluvwine.exception.ErrorCode.WINE_NOT_FOUND;
 
 
@@ -31,6 +32,7 @@ public class WineService {
     private final WineRepository wineRepository;
     private final ReviewRepository reviewRepository;
     private final RecommendRepository recommendRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
     public ResponseEntity<Message> searchWine(String searchKeyword){
@@ -52,7 +54,10 @@ public class WineService {
         List<ReviewListResponseDto> reviewListResponseDto = reviewRepository.findAllByWineIdOrderByCreatedAtDesc(wineId)
                 .stream().map(ReviewListResponseDto::new).collect(Collectors.toList());
         boolean recommended = recommendRepository.findByWineIdAndMemberId(wineId, memberId).isPresent();
-        WineDetailPageResponseDto dto = new WineDetailPageResponseDto(wine, recommended, reviewListResponseDto);
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new CustomException(USER_NOT_FOUND)
+        );
+        WineDetailPageResponseDto dto = new WineDetailPageResponseDto(wine, recommended, member, reviewListResponseDto);
         Message message = Message.setSuccess(StatusEnum.OK,"상세 페이지 조회 성공", dto);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
