@@ -34,11 +34,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e){
         e.printStackTrace();
-        return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
     }
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e){
         e.printStackTrace();
-        return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
     }
 }
