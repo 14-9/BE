@@ -1,6 +1,5 @@
 package com.example.weluvwine.domain.wine.controller;
 
-import com.example.weluvwine.domain.wine.dto.SearchKeywordDto;
 import com.example.weluvwine.domain.wine.entity.WineType;
 import com.example.weluvwine.domain.wine.service.WineService;
 import com.example.weluvwine.security.auth.UserDetailsImpl;
@@ -21,8 +20,8 @@ public class WineController {
 
     @Operation(summary = "검색 메서드", description = "검색 메서드입니다.")
     @GetMapping("/search")
-    public ResponseEntity<Message> searchWine(@RequestBody SearchKeywordDto searchKeyword, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return wineService.searchWine(searchKeyword.getSearchKeyword());
+    public ResponseEntity<Message> searchWine(@RequestParam String searchKeyword, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return wineService.searchWine(searchKeyword);
     }
 
     @Operation(summary = "검색페이지 조회 메서드" , description = "검색창 실행시 와인 정보입니다.")

@@ -21,6 +21,6 @@ public class SignupMemberRequestDto {
     @Size(min = 2, max = 8, message = "닉네임은 2~8글자로 생성해주세요")
     private String nickname;
 
-    private String email;
+//    private String email;
 
 }
