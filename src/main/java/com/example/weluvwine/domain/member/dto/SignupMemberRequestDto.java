@@ -2,6 +2,7 @@ package com.example.weluvwine.domain.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class SignupMemberRequestDto {
 
     @Pattern(regexp = "^[a-z0-9_-]{5,20}$", message = "아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")
