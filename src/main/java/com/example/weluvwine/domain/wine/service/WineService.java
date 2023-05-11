@@ -1,5 +1,7 @@
 package com.example.weluvwine.domain.wine.service;
 
+
+
 import com.example.weluvwine.domain.member.entity.Member;
 import com.example.weluvwine.domain.member.repository.MemberRepository;
 import com.example.weluvwine.domain.recommend.repository.RecommendRepository;
@@ -36,6 +38,10 @@ public class WineService {
 
     @Transactional(readOnly = true)
     public ResponseEntity<Message> searchWine(String searchKeyword){
+        if (searchKeyword.isEmpty()) {
+            Message message = Message.setSuccess(StatusEnum.OK,"검색 결과 없음");
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
         List<Wine> wineList = wineRepository.findByNameContaining(searchKeyword);
         Message message;
         if(wineList.size() == 0){
