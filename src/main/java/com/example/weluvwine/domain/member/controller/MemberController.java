@@ -2,9 +2,9 @@ package com.example.weluvwine.domain.member.controller;
 
 import com.example.weluvwine.domain.member.dto.LoginMemberRequestDto;
 import com.example.weluvwine.domain.member.dto.SignupMemberRequestDto;
-import com.example.weluvwine.domain.member.dto.VerifyEmailRequestDto;
-import com.example.weluvwine.domain.member.service.EmailServiceImpl;
-import com.example.weluvwine.domain.member.service.EmailVerifiedService;
+//import com.example.weluvwine.domain.member.dto.VerifyEmailRequestDto;
+//import com.example.weluvwine.domain.member.service.EmailServiceImpl;
+//import com.example.weluvwine.domain.member.service.EmailVerifiedService;
 import com.example.weluvwine.domain.member.service.MemberService;
 import com.example.weluvwine.security.auth.UserDetailsImpl;
 import com.example.weluvwine.util.Message;
@@ -25,7 +25,7 @@ import javax.validation.Valid;
 @Tag(name = "MemberController", description = "유저 관련 API")
 public class MemberController {
     private final MemberService memberService;
-    private final EmailVerifiedService emailVerifiedService;
+//    private final EmailVerifiedService emailVerifiedService;
 
 
     @Operation(summary = "회원가입 메서드", description = "회원가입 메서드입니다.")
