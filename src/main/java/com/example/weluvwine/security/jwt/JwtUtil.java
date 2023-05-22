@@ -33,7 +33,7 @@ public class JwtUtil {
     private static final String BEARER_PREFIX = "Bearer ";
     public static final String ACCESS_KEY = "ACCESS_KEY";
     public static final String REFRESH_KEY = "REFRESH_KEY";
-    private static final long ACCESS_TIME = Duration.ofMinutes(60).toMillis();
+    private static final long ACCESS_TIME = Duration.ofMinutes(1).toMillis();
     private static final long REFRESH_TIME = Duration.ofDays(14).toMillis();
     private final RedisUtil redisUtil;
 
@@ -68,6 +68,22 @@ public class JwtUtil {
     public String createToken(String memberId, String token) {
         Date date = new Date();
         long tokenType = token.equals("Access") ? ACCESS_TIME : REFRESH_TIME;
+
+        return BEARER_PREFIX +
+                Jwts.builder()
+                        .setSubject(memberId)
+                        .setExpiration(new Date(date.getTime() + tokenType))
+                        .setIssuedAt(date)
+                        .signWith(key, signatureAlgorithm)
+                        .compact();
+    }
+    public String createRefreshToken(String memberId, long time) {
+        return createRefreshTokena(memberId, time);
+    }
+
+    public String createRefreshTokena(String memberId, long time) {
+        Date date = new Date();
+        long tokenType = time;
 
         return BEARER_PREFIX +
                 Jwts.builder()
@@ -115,6 +131,9 @@ public class JwtUtil {
     }
     public void setHeaderAccessToken(HttpServletResponse response, String accessToken) {
         response.setHeader(ACCESS_KEY, accessToken);
+    }
+    public void setHeaderRefreshToken(HttpServletResponse response, String RefreshToken) {
+        response.setHeader(REFRESH_KEY, RefreshToken);
     }
 
     public long getExpirationTime(String token) {
