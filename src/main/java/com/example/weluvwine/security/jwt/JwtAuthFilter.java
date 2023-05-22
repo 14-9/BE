@@ -2,6 +2,8 @@ package com.example.weluvwine.security.jwt;
 
 import com.example.weluvwine.domain.member.entity.Member;
 import com.example.weluvwine.domain.member.repository.MemberRepository;
+import com.example.weluvwine.security.refreshToken.RefreshToken;
+import com.example.weluvwine.security.refreshToken.RefreshTokenRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -25,6 +28,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final MemberRepository memberRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -49,6 +53,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 //Header에 ACCESS TOKEN 추가
                 jwtUtil.setHeaderAccessToken(response, newAccessToken);
                 setAuthentication(memberId);
+                long time = jwtUtil.getExpirationTime(refresh_token);
+                String newRefreshToken = jwtUtil.createRefreshToken(memberId, time);
+                Optional<RefreshToken> refreshToken = refreshTokenRepository.findByMemberId(member.getMemberId());
+                refreshTokenRepository.save(refreshToken.get().updateToken(newRefreshToken));
+                jwtUtil.setHeaderRefreshToken(response, newRefreshToken);
             } else if (refresh_token == null) {
                 jwtExceptionHandler(response, "AccessToken Expired.", HttpStatus.BAD_REQUEST.value());
                 return;
@@ -56,7 +65,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 jwtExceptionHandler(response, "RefreshToken Expired.", HttpStatus.BAD_REQUEST.value());
                 return;
             }
-            // 다음 필터로 요청과 응답을 전달하여 필터 체인 계속 실행
             filterChain.doFilter(request, response);
         }
     }
